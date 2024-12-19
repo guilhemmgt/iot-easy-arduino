@@ -21,7 +21,7 @@
 */
 
 #include "pitches.h"
-#define PIN_SPEAKER 15
+#define PIN_SPEAKER 10
 // notes in the melody:
 int melody[] = {
 

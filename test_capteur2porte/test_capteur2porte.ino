@@ -1,4 +1,4 @@
-const int DOOR_SENSOR_PIN = 5;
+const int DOOR_SENSOR_PIN = 15;
 int doorState;
 
 void setup() {
