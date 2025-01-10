@@ -130,30 +130,28 @@ void loop() {
   // no need to repeat the melody.
 }
 void play_next_note() {
-  if(!PRINT) {
-    noTone(SPEAKER_PIN);
-    // to calculate the note duration, take one second divided by the note type.
 
-    //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
+  noTone(SPEAKER_PIN);
+  // to calculate the note duration, take one second divided by the note type.
 
-    int noteDuration = 1000 / noteDurations[thisNote];
+  //e.g. quarter note = 1000 / 4, eighth note = 1000/8, etc.
 
-    tone(SPEAKER_PIN, melody[thisNote], noteDuration);
+  int noteDuration = 1000 / noteDurations[thisNote];
 
-    // to distinguish the notes, set a minimum time between them.
+  tone(SPEAKER_PIN, melody[thisNote], noteDuration);
 
-    // the note's duration + 30% seems to work well:
+  // to distinguish the notes, set a minimum time between them.
 
-    int pauseBetweenNotes = noteDuration * 1.30;
+  // the note's duration + 30% seems to work well:
 
-    nextNote = millis() + pauseBetweenNotes;
+  int pauseBetweenNotes = noteDuration * 1.30;
 
-    // stop the tone playing:
+  nextNote = millis() + pauseBetweenNotes;
 
-    thisNote = (thisNote + 1) % (sizeof(melody) / sizeof(int));
-  } else {
-    // println("BIP");
-  }
+  // stop the tone playing:
+
+  thisNote = (thisNote + 1) % (sizeof(melody) / sizeof(int));
+
 }
 // Récupère la touche préssée
 char get_current_key() {
