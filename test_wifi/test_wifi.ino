@@ -1,3 +1,5 @@
+#include <ArduinoJson.h>
+#include <ArduinoJson.hpp>
 #include <ESP8266WiFi.h>
 #include <ESP8266HTTPClient.h>
 // NTPClient by Fabrice Weinberg
@@ -37,15 +39,7 @@ void setup() {
    delay(500);
    Serial.print(".");
   }
-  // Serial.println();
-  // Serial.println();
-  // Serial.print("Connecting to ");
-  // Serial.println(ssid);
-  // WiFi.begin(ssid, password);
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   Serial.println("Connexion en cours...");
-  //   delay(1000);
-  // }
+
   Serial.println("");
   Serial.println("WiFi connected");
   Serial.println("IP address: ");
@@ -58,17 +52,15 @@ void setup() {
 const char* url = "https://easy.kazzad.fr";
 
 void loop() {
-  delay(10000);
+  delay(1000);
   short response_code = 0;
   Serial.print("connecting to ");
   Serial.println(host);
-  // Use WiFiClient class to create TCP connections
-  String payload = "";
   std::unique_ptr<BearSSL::WiFiClientSecure>client(new BearSSL::WiFiClientSecure);
   client->setInsecure();
   HTTPClient http;
   http.setReuse(true);
-  http.setTimeout(6000);
+  http.setTimeout(1000);
 
   // uint16_t httpsPort = 8443;
   // if (!client.connect(host, httpsPort)) {
@@ -94,16 +86,28 @@ void loop() {
   
   int httpResponseCode = http.POST(request);
   if (httpResponseCode > 0) {
-    http.writeToStream(&Serial);
+    // http.writeToStream(&Serial);
 
     // HTTP header has been send and Server response header has been handled
-    Serial.printf("[HTTP] ... code: %d\n", httpResponseCode);
+    // Serial.printf("[HTTP] ... code: %d\n", httpResponseCode);
 
     // file found at server
     if (httpResponseCode >= 200 and httpResponseCode <= 299) {
       response_code = 1;
       String payload = http.getString();
-      Serial.println(payload);
+
+      DynamicJsonDocument doc(1024);
+
+      // You can use a String as your JSON input.
+      // WARNING: the string in the input  will be duplicated in the JsonDocument.
+      deserializeJson(doc, payload);
+      JsonObject obj = doc.as<JsonObject>();
+      bool answer = obj[String("message")].as<bool>();
+      if (answer) {
+        Serial.println("Set alarm off !");
+      } else {
+        Serial.println("Do nothing");
+      }
     }
   } else {
     Serial.printf("[HTTP] ... failed, error: %s\n", http.errorToString(httpResponseCode).c_str());

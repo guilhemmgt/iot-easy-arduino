@@ -53,7 +53,7 @@ do {							 \
 
 
 #define OPEN LOW
-#define CLOSED HIGH
+#define CLOSEED HIGH
 
 typedef char KeypadEvent;
 typedef unsigned int uint;

@@ -47,7 +47,7 @@ void setup() {
   pinMode(DOOR_SENSOR_PIN, INPUT_PULLUP);
 
   if (PRINT) {
-    Serial.begin(9600);
+    Serial.begin(115200);
   } else {
     pinMode(SPEAKER_PIN, OUTPUT);
 

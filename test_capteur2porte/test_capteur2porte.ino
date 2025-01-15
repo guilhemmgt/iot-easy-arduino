@@ -1,9 +1,9 @@
-const int DOOR_SENSOR_PIN = 15;
+const int DOOR_SENSOR_PIN = 13;
 int doorState;
 
 void setup() {
   // put your setup code here, to run once:
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(DOOR_SENSOR_PIN, INPUT_PULLUP);
 
 }
