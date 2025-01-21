@@ -1,4 +1,7 @@
-Arduino software for E.A.S.Y.
+Projet de IoT réalisé en 3ème année de formation à l'ENSEEIHT.
 
-See the Mobile app repo [here](https://github.com/guilhemmgt/iot-easy-app) \
-See the Server code repo [here](https://github.com/guilhemmgt/iot-easy-server)
+EASY est un système d'alarme de porte connecté.
+
+Ceci est le repo de l'Arduino. \
+Voir le repo de l'application mobile [ici](https://github.com/guilhemmgt/iot-easy-app). \
+Voir le repo du serveur [ici](https://github.com/guilhemmgt/iot-easy-server).
